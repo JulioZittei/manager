@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.manager.dao.Database;
+import br.com.alura.manager.domain.Company;
+
 
 @WebServlet("/new-company")
 public class NewCompanyServlet extends HttpServlet {
@@ -20,9 +23,13 @@ public class NewCompanyServlet extends HttpServlet {
 		System.out.println("Registering new company!");
 		PrintWriter writer = response.getWriter();
 		
-		String newCompany = request.getParameter("name");
+		String nameOfCompany = request.getParameter("name");
+		Company newCompany = new Company(nameOfCompany);
 		
-		writer.println("<html><body><h1>Company "+ newCompany +" Registered Successfully!</h1></body></html>");
+		Database database = new Database();
+		database.add(newCompany);
+		
+		writer.println("<html><body><h1>Company "+ newCompany.getName() +" Registered Successfully!</h1></body></html>");
 		
 	}
 
