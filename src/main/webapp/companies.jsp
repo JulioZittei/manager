@@ -1,28 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List, br.com.alura.manager.domain.Company" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Companies List</title>
-</head>
-<body>
-		<ul>
-		<%
-			List<Company> companies = (List<Company>) request.getAttribute("companies");
-			for(Company company : companies) {
-		%>
-		
-			<li>
-				<%= company.getName() %>
-			</li>
-		
-		<%
-			}
-		%>
-		
-		</ul>
-
-</body>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Companies List</title>
+	</head>
+	<body>
+		<main>
+			<h1>Companies List</h1>
+			<ul>
+				<c:forEach items="${companies}" var="company">
+					<li>${company.name}</li>
+				</c:forEach>
+			</ul>
+		</main>
+	</body>
 </html>
