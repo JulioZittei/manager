@@ -1,8 +1,8 @@
 package br.com.alura.manager.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,16 +21,16 @@ public class NewCompanyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Registering new company!");
-		PrintWriter writer = response.getWriter();
 		
-		String nameOfCompany = request.getParameter("name");
-		Company newCompany = new Company(nameOfCompany);
+		String companyName = request.getParameter("name");
+		Company newCompany = new Company(companyName);
 		
 		Database database = new Database();
 		database.add(newCompany);
 		
-		writer.println("<html><body><h1>Company "+ newCompany.getName() +" Registered Successfully!</h1></body></html>");
-		
+		request.setAttribute("company", newCompany);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("registered-company.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
