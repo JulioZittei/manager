@@ -1,13 +1,17 @@
 package br.com.alura.manager.domain;
 
+import java.util.Date;
+
 public class Company {
 
 	private int id;
 	private String name;
+	private Date openingDate;
 	
-	public Company(String name) {
+	public Company(String name, Date openingDate) {
 		super();
 		this.name = name;
+		this.openingDate = openingDate;
 	}
 	
 	public int getId() {
@@ -25,7 +29,13 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public Date getOpeningDate() {
+		return openingDate;
+	}
+
+	public void setOpeningDate(Date openingDate) {
+		this.openingDate = openingDate;
+	}
 	
 }

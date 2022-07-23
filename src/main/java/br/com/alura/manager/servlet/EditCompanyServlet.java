@@ -15,17 +15,16 @@ import br.com.alura.manager.dao.Database;
 import br.com.alura.manager.domain.Company;
 
 
-@WebServlet("/newCompany")
-public class NewCompanyServlet extends HttpServlet {
-	
+@WebServlet("/editCompany")
+public class EditCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Updating company!");
 		
-		System.out.println("Registering new company!");
-		
-		String name = request.getParameter("name");
-		String openingDate = request.getParameter("openingDate");
+		String name = (String) request.getParameter("name");
+		String openingDate = (String) request.getParameter("openingDate");
+		String id = (String) request.getParameter("id");
 		
 		Date formattedOpeningDate = null;
 		
@@ -38,13 +37,14 @@ public class NewCompanyServlet extends HttpServlet {
 			throw new ServletException(e);
 		}
 		
-		Company newCompany = new Company(name, formattedOpeningDate);
-		
 		Database database = new Database();
-		database.save(newCompany);
-
+		Company existingCompany = database.findById(Integer.valueOf(id));
+		
+		existingCompany.setName(name);
+		existingCompany.setOpeningDate(formattedOpeningDate);
+		
 		response.sendRedirect("companies");
 	
 	}
-		
+
 }

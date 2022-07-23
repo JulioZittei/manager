@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url value="/newCompany" var="linkForm"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,10 +47,15 @@
 		</style>
 	</head>
 	<body>
+	
+	
 		<main>
-			<form action="/manager/new-company" method="POST">
+			<form action="${linkForm}" method="POST">
 				<div class="form-row">
 					<label for="name">Name: </label> <input type="text" id="name" name="name" required/>
+				</div>
+				<div class="form-row">
+					<label for="openingDate">Opening date: </label> <input type="text" id="openingDate" name="openingDate" required/>
 				</div>
 				<div class="form-row">
 					<button type="submit">Enviar</button>
